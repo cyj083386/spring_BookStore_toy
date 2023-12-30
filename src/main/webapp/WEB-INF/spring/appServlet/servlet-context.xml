@@ -10,7 +10,7 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller, @ReauestMapping 등 programming model(컨트롤러 매핑 설정), handlerMapping과 handlerAdapter 빈 객체도 자동등록 -->
-	<annotation-driven enable-matrix-variables="true"/>
+	<annotation-driven enable-matrix-variables="true" validator="validator"/>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up !static resources! in the ${webappRoot}/resources directory (js, css등)-->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -49,17 +49,16 @@
 
 	</beans:bean>
 
-<!--	<beans:bean id="validator"  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">-->
-<!--		<beans:property name="validationMessageSource" ref="messageSource" />-->
-<!--	</beans:bean>-->
+	<beans:bean id="validator"  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<beans:property name="validationMessageSource" ref="messageSource" />
+	</beans:bean>
 
-<!--	<beans:bean id="unitsInStockValidator"-->
-<!--				class="com.springmvc.validator.UnitsInStockValidator"/>-->
-<!--	<beans:bean id="bookValidator" class="com.springmvc.validator.BookValidator">-->
-<!--		<beans:property name = "springValidators">-->
-<!--			<beans:set>-->
-<!--				<beans:ref bean = "unitsInStockValidator"/>-->
-<!--			</beans:set>-->
-<!--		</beans:property>-->
-<!--	</beans:bean>-->
+	<beans:bean id="unitsInStockValidator" class="kr.co.chunjae.validator.UnitsInStockValidator"/>
+	<beans:bean id="bookValidator" class="kr.co.chunjae.validator.BookValidator">
+		<beans:property name = "springValidators">
+			<beans:set>
+				<beans:ref bean = "unitsInStockValidator"/>
+			</beans:set>
+		</beans:property>
+	</beans:bean>
 </beans:beans>

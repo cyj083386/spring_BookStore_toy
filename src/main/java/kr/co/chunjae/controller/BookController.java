@@ -5,6 +5,8 @@ import kr.co.chunjae.domain.Book;
 import kr.co.chunjae.exception.BookIdException;
 import kr.co.chunjae.exception.CategoryException;
 import kr.co.chunjae.service.BookService;
+import kr.co.chunjae.validator.BookValidator;
+import kr.co.chunjae.validator.UnitsInStockValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -119,8 +121,15 @@ public class BookController {
         model.addAttribute("addTitle", "신규 도서 등록");
     }
 
+    @Autowired
+    private BookValidator bookValidator; // BookValidator 인스턴스 선언
+    //UnitsInStockValidator의 인스턴스 선언
+//    private UnitsInStockValidator unitsInStockValidator;
+
+
     @InitBinder("NewBook")
     public void initBinder(WebDataBinder binder) {
+        binder.setValidator(bookValidator);//unitsInStockValidator대신 새로 생성한 bookValidator로 교체
         binder.setAllowedFields("bookId","name","unitPrice","author", "description",
                 "publisher","category","unitsInStock","totalPages", "releaseDate", "condition", "bookImage");
     }

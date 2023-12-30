@@ -5,6 +5,7 @@ import kr.co.chunjae.domain.Book;
 import kr.co.chunjae.exception.BookIdException;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Repository
@@ -14,7 +15,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     public BookRepositoryImpl(){
 
-            Book book1 = new Book("ISBN1234", "C# 교과서", 30000);
+            Book book1 = new Book("ISBN1234", "C# 교과서", new BigDecimal("30000"));
             book1.setAuthor("박용준");
             book1.setDescription(
                     "C# 교과서는 생애 첫 츠프로그램 언어로 C#을 시작하는 독자를 새상으로 한다. 특히 응용" +
@@ -25,7 +26,7 @@ public class BookRepositoryImpl implements BookRepository {
             book1.setUnitsInStock(1000);
             book1.setReleaseDate("2020/05/29");
 
-            Book book2 = new Book("ISBN1235", "Node.js 교과서", 36000);
+            Book book2 = new Book("ISBN1235", "Node.js 교과서", new BigDecimal("36000"));
             book2.setAuthor("조현영");
             book2.setDescription("이 책은 프린트부터 서버, 데이터베이스, 배포까지 아우르는 광범위한 내용을 다룬다."+
                     "군더더기 없는 직관적인 설명으로 기본 개념을 확실히 이해하고, 노드의 기능과 생태계를 사용해 보면서"+
@@ -36,7 +37,7 @@ public class BookRepositoryImpl implements BookRepository {
             book2.setUnitsInStock(1000);
             book2.setReleaseDate("2020/07/25");
 
-            Book book3 = new Book("ISBN1236", "어도비 XD CC 2020", 25000);
+            Book book3 = new Book("ISBN1236", "어도비 XD CC 2020", new BigDecimal("25000"));
             book3.setAuthor("김두한");
             book3.setDescription(
                     "어도비XD 프로그램을 통해 UI/UX 디자인을 배우고자 하는 예비 디자이너의 눈높이에 맞게" +
