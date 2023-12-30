@@ -17,6 +17,18 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- Validation -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.4.2.Final</version>
+		</dependency>
 		<!-- Spring: 6.0 부터는 java 17기반으로 변경되므로, 5.x 대 사용 https://marrrang.tistory.com/101 -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -40,4 +40,26 @@
 		<beans:bean class= "kr.co.chunjae.interceptor.MonitoringInterceptor"/>
 		<beans:bean class= "kr.co.chunjae.interceptor.AuditingInterceptor"/>
 	</interceptors>
+
+
+	<beans:bean id= "messageSource"
+				class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basename" value="messages"/>
+		<beans:property name="defaultEncoding" value="UTF-8" />
+
+	</beans:bean>
+
+<!--	<beans:bean id="validator"  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">-->
+<!--		<beans:property name="validationMessageSource" ref="messageSource" />-->
+<!--	</beans:bean>-->
+
+<!--	<beans:bean id="unitsInStockValidator"-->
+<!--				class="com.springmvc.validator.UnitsInStockValidator"/>-->
+<!--	<beans:bean id="bookValidator" class="com.springmvc.validator.BookValidator">-->
+<!--		<beans:property name = "springValidators">-->
+<!--			<beans:set>-->
+<!--				<beans:ref bean = "unitsInStockValidator"/>-->
+<!--			</beans:set>-->
+<!--		</beans:property>-->
+<!--	</beans:bean>-->
 </beans:beans>

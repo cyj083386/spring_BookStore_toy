@@ -1,8 +1,11 @@
 package kr.co.chunjae.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
@@ -11,9 +14,17 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor  // 일반 생성자
 
 public class Book {
+    @Pattern(regexp="ISBN[1-9]+", message="{Pattern.NewBook.bookId}")
     private String bookId;            // 도서Id
+
+    @Size(min=4, max=50, message="{Size.NewBook.name}")
     private String name;              // 도서명
+
+    @Min(value=0, message="{Min.NewBook.unitPrice}")
+    @Digits(integer=8, fraction=2, message="{Digits.NewBook.unitPrice}") // 이 숫자에 허용되는 최대 정수 자릿수
+    @NotNull(message= "{NotNull.NewBook.unitPrice}")
     private int unitPrice;            // 도서 가격
+
     private String author;            // 저자
     private String description;       // 설명
     private String publisher;         // 출판사

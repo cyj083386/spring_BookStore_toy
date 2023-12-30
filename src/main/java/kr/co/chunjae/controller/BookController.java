@@ -8,12 +8,14 @@ import kr.co.chunjae.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +91,11 @@ public class BookController {
         return "addBook";
     }
     @PostMapping("/add")
-    public String submitAddNewBook(@ModelAttribute("NewBook") Book book) {
+    public String submitAddNewBook(@Valid @ModelAttribute("NewBook")  Book book, BindingResult result) {
+
+        if(result.hasErrors()) {
+            return "addBook";
+        }
         // 이미지 등록을 위한 수정
         MultipartFile bookImage = book.getBookImage();
 
