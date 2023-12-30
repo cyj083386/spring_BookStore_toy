@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<!-- 콘솔 출력 로그 설정 -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c(1):%L - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- 파일에 출력하기 -->
+	<appender name="monitor" class="org.apache.log4j.RollingFileAppender">
+		<param name="append" value="false"/>  <!-- 기존 로그 파일을 지우고 새로 생성한다. -->
+		<param name="maxFileSize" value="10KB"/>  <!-- 파일 크기 최댓값-->
+		<param name="maxBackupIndex" value="5"/>  <!-- 생성할 백업 파일 수 -->
+		<param name="file" value="c:/logs/monitor.log"/>  <!-- 로그 파일 이름 설정-->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c(1):%L - %m%n"/>
+		</layout>
+		<!-- 로깅 레벨의 범위를 지정하는 클래스 설정 -->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="info"/>  <!-- 로깅 레벨의 최하위 레벨 -->
+			<param name="LevelMax" value="info"/>  <!-- 로깅 레벨의 최상위 레벨 -->
+		</filter>
+	</appender>
+
+	<!--HandlerInterceptorAdapter 클래스로 세 메서드 필수 구현없이 로깅-->
+	<appender name="audit" class="org.apache.log4j.RollingFileAppender">
+		<param name="append" value="false" />
+		<param name="maxFileSize" value="10KB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="file" value="c:/logs/audit.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="warn" />
+			<param name="LevelMax" value="warn" />
+		</filter>
+	</appender>
+
+	<!-- Application Loggers -->
+	<logger name="kr.co.chunjae">
+		<level value="info" />
+		<appender-ref ref="monitor"/>
+		<appender-ref ref="audit"/>
+	</logger>
+
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="warn" />
+		<appender-ref ref="console" />
+	</root>
+	
+</log4j:configuration>

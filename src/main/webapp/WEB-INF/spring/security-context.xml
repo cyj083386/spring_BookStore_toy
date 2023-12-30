@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/security
+ http://www.springframework.org/schema/security/spring-security.xsd">
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- http는 최상위 태그. auto-config로 기본보안(기본 로그인 페이지, http 기본인증, 로그아웃) 지원여부 설정, use-expressions로 SpEL지원 여부 설정	-->
+	<http auto-config="true" use-expressions="true">
+
+		<intercept-url pattern="/books/add"  access="hasAuthority('ROLE_ADMIN')" />
+		<intercept-url pattern="/**"  access="permitAll" />
+		<intercept-url pattern="/upload/**" access="permitAll()"/>
+		<!--로그인 페이지 걍로, 인증 성공시 경로, 인증 실패시 경로, 사용자 계정 이름, 사용자 계정 비밀번호.	-->
+
+		<form-login login-page="/login"
+					default-target-url="/books/add"
+					authentication-failure-url="/loginfailed"
+					username-parameter="username"
+					password-parameter="password"/>
+		<csrf/>
+		<logout logout-success-url="/logout/"/>
+	</http>
+
+
+		<!--origin hasAuthority 와 hasRole은 표현의 차이이다.
+		권한과 역할의 분리로 비즈니스 측면에서 같은 관리자(Authority)여도 Role이 pm인지, developer 인지로 나눌 수 있다-->
+       <!-- <intercept-url pattern="/admin/**"  access="hasAuthority('ROLE_ADMIN')" />
+        <intercept-url pattern="/manager/**"  access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/member/**"  access="isAuthenticated()" />
+        <intercept-url pattern="/**"  access="permitAll" />
+-->
+	<!--사용자 권한 서비스 태그는 허가된 사용자의 아이디와 비밀번호등 사용자 정보를 직접 설정하는데 사용-->
+    <authentication-manager>
+    	<authentication-provider>
+        	<user-service>
+        		<user name="Admin"  password="{noop}Admin1234" authorities="ROLE_ADMIN"/>
+				<!--<user name="guest"  password="{noop}guest1234" authorities="ROLE_USER"/>-->
+				<!--<user name="admin"  password="{noop}1234" authorities="ROLE_ADMIN, ROLE_MANAGER, ROLE_USER"/>
+				<user name="manager"  password="{noop}1235" authorities="ROLE_MANAGER, ROLE_USER"/>
+				<user name="guest"  password="{noop}1236" authorities="ROLE_USER"/>-->
+				<!--<jdbc-user-service data-source-ref="dataSource" />-->
+        	 </user-service>
+    	</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>
