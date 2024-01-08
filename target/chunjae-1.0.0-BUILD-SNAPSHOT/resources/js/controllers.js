@@ -7,7 +7,6 @@ function addToCart(action) {
 function removeFromCart(action) {
     document.removeForm.action = action;
     document.removeForm.submit();
-    location.replace(window.location);
 }
 
 function clearCart() {

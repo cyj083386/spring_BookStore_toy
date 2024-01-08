@@ -18,17 +18,21 @@
 
 	<dependencies>
 
-		<!-- Validation -->
+		<!-- Validation, https://beanvalidation.org/2.0/ 참고하여 버전 선정 -->
+		<!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>2.0.1.Final</version>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>2.0.2</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.4.2.Final</version>
+			<version>6.2.5.Final</version>
 		</dependency>
+
 		<!-- Spring: 6.0 부터는 java 17기반으로 변경되므로, 5.x 대 사용 https://marrrang.tistory.com/101 -->
 		<dependency>
 			<groupId>org.springframework</groupId>

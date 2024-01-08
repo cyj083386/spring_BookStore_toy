@@ -45,7 +45,7 @@
                 <td>${item.value.book.unitPrice}</td>
                 <td>${item.value.quantity}</td>
                 <td>${item.value.totalPrice}</td>
-                <td><input type="button" value="delete" onclick="removeFromCart('../cart/remove/${item.value.book.bookId}')"></td>
+                <td><input type="button" value="delete" onclick="removeFromCart('${item.value.book.bookId}')"></td>
 <%--                    <a href="javascript:removeFromCart('../cart/remove/${item.value.book.bookId}')" class="badge badge-danger">delete</a></td>--%>
             </tr>
             </c:forEach>
